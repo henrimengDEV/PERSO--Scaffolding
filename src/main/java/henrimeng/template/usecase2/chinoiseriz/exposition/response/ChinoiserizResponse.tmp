@@ -1,0 +1,13 @@
+import lombok.*;
+
+@Getter
+@ToString
+@AllArgsConstructor(staticName = "of")
+public final class ChinoiserizResponse {
+    private Long id;
+    private String title;
+
+    public static ChinoiserizResponse fromChinoiseriz(Chinoiseriz chinoiseriz) {
+        return new ChinoiserizResponse(chinoiseriz.getId().getValue(), chinoiseriz.getTitle());
+    }
+}

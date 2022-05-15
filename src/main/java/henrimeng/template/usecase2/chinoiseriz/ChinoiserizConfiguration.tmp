@@ -1,0 +1,47 @@
+import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.context.annotation.Bean;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@SpringBootConfiguration
+public class ChinoiserizConfiguration {
+
+    private final JpaChinoiserizRepository jpaChinoiserizRepository;
+    private final ChinoiserizMapper chinoiserizMapper;
+
+    public ChinoiserizConfiguration(
+        JpaChinoiserizRepository jpaChinoiserizRepository,
+        ChinoiserizMapper chinoiserizMapper
+    ) {
+        this.jpaChinoiserizRepository = jpaChinoiserizRepository;
+        this.chinoiserizMapper = chinoiserizMapper;
+    }
+
+    @Bean
+    public CommandBus commandBus() {
+        final Map<Class<? extends Command>, CommandHandler> commandHandlerMap = new HashMap<>();
+        commandHandlerMap.put(CreateChinoiserizCmd.class, new CreateChinoiserizCmdHandler(chinoiserizService()));
+        commandHandlerMap.put(DeleteChinoiserizByIdCmd.class, new DeleteChinoiserizByIdCmdHandler(chinoiserizService()));
+        commandHandlerMap.put(UpdateChinoiserizCmd.class, new UpdateChinoiserizCmdHandler(chinoiserizService()));
+        return new SimpleCommandBus(commandHandlerMap);
+    }
+
+    @Bean
+    public QueryBus queryBus() {
+        final Map<Class<? extends Query>, QueryHandler> queryHandlerMap = new HashMap<>();
+        queryHandlerMap.put(ReadChinoiserizByIdQuery.class, new ReadChinoiserizByIdQueryHandler(chinoiserizService()));
+        queryHandlerMap.put(ReadChinoiserizQuery.class, new ReadChinoiserizQueryHandler(chinoiserizService()));
+        return new SimpleQueryBus(queryHandlerMap);
+    }
+
+    @Bean
+    public ChinoiserizService chinoiserizService() {
+        return new SpringChinoiserizService(H2ChinoiserizRepository());
+    }
+
+    @Bean
+    public ChinoiserizRepository H2ChinoiserizRepository() {
+        return new H2ChinoiserizRepository(jpaChinoiserizRepository, chinoiserizMapper);
+    }
+}

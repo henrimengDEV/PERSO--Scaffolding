@@ -1,0 +1,44 @@
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+@Repository
+@Primary
+public class H2ChinoiserizRepository implements ChinoiserizRepository {
+
+    private final JpaChinoiserizRepository jpaChinoiserizRepository;
+    private final ChinoiserizMapper chinoiserizMapper;
+
+    public H2ChinoiserizRepository(JpaChinoiserizRepository jpaChinoiserizRepository, ChinoiserizMapper chinoiserizMapper) {
+        this.jpaChinoiserizRepository = jpaChinoiserizRepository;
+        this.chinoiserizMapper = chinoiserizMapper;
+    }
+
+    @Override
+    public List<Chinoiseriz> findAll() {
+        return jpaChinoiserizRepository.findAll()
+                .stream()
+                .map(chinoiserizMapper::toModel)
+                .collect(Collectors.toUnmodifiableList());
+    }
+
+    @Override
+    public Optional<Chinoiseriz> findById(ChinoiserizId id) {
+        return jpaChinoiserizRepository.findById(id.getValue())
+                .map(chinoiserizMapper::toModel);
+    }
+
+    @Override
+    public ChinoiserizId save(Chinoiseriz chinoiseriz) {
+        return chinoiserizMapper.toModel(jpaChinoiserizRepository.save(chinoiserizMapper.toEntity(chinoiseriz))).getId();
+    }
+
+    @Override
+    public ChinoiserizId delete(ChinoiserizId id) {
+        jpaChinoiserizRepository.deleteById(id.getValue());
+        return id;
+    }
+}

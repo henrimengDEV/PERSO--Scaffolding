@@ -14,4 +14,8 @@ public final class FileUtils {
         File file = new File(path + name);
         return file.mkdir();
     }
+
+    public static String nameWithLowerCase(String name) {
+        return name.substring(0, 1).toLowerCase() + name.substring(1);
+    }
 }

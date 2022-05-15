@@ -1,0 +1,23 @@
+import lombok.Getter;
+
+import javax.persistence.*;
+
+@Entity(name = "chinoiserizs")
+@Getter
+public class ChinoiserizEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String title;
+
+    public ChinoiserizEntity id(Long id) {
+        this.id = id;
+        return this;
+    }
+
+    public ChinoiserizEntity title(String title) {
+        this.title = title;
+        return this;
+    }
+}

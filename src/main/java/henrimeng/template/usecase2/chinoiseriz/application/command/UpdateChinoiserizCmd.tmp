@@ -1,0 +1,9 @@
+import lombok.Builder;
+import lombok.NonNull;
+
+@Builder
+public final class UpdateChinoiserizCmd implements Command {
+    @NonNull
+    public Long id;
+    public String title;
+}

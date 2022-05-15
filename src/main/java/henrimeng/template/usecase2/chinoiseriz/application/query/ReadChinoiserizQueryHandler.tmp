@@ -1,0 +1,15 @@
+import java.util.List;
+
+public final class ReadChinoiserizQueryHandler implements QueryHandler<ReadChinoiserizQuery, List<Chinoiseriz>> {
+
+    private final ChinoiserizService chinoiserizService;
+
+    public ReadChinoiserizQueryHandler(ChinoiserizService chinoiserizService) {
+        this.chinoiserizService = chinoiserizService;
+    }
+
+    @Override
+    public List<Chinoiseriz> handle(ReadChinoiserizQuery query) {
+        return chinoiserizService.getAll();
+    }
+}

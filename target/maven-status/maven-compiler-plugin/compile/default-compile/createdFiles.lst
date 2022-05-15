@@ -1,0 +1,9 @@
+henrimeng/service/generator/ApplicationGeneratorService.class
+henrimeng/service/generator/ExpositionGeneratorService.class
+henrimeng/service/generator/KernelGeneratorService.class
+henrimeng/service/GeneratorService.class
+henrimeng/FileUtils.class
+henrimeng/Main.class
+henrimeng/service/generator/InfrastructureGeneratorService.class
+henrimeng/service/CopyService.class
+henrimeng/service/generator/DomainGeneratorService.class

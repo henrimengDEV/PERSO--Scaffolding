@@ -1,0 +1,5 @@
+public class ChinoiserizNotFoundException extends RuntimeException {
+    public ChinoiserizNotFoundException(ChinoiserizId id) {
+        super("Chinoiseriz with id \"" + id.getValue() + "\" not found");
+    }
+}

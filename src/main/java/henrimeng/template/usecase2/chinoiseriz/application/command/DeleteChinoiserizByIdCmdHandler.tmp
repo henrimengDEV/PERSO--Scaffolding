@@ -1,0 +1,14 @@
+public final class DeleteChinoiserizByIdCmdHandler implements CommandHandler<DeleteChinoiserizByIdCmd, Void> {
+
+    private ChinoiserizService chinoiserizService;
+
+    public DeleteChinoiserizByIdCmdHandler(ChinoiserizService chinoiserizService) {
+        this.chinoiserizService = chinoiserizService;
+    }
+
+    @Override
+    public Void handle(DeleteChinoiserizByIdCmd command) {
+        chinoiserizService.remove(new ChinoiserizId(command.getId()));
+        return null;
+    }
+}

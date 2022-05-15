@@ -1,0 +1,64 @@
+package nf.fr.codelab.backend.infrastructure.repository.jpa;
+
+import lombok.Getter;
+
+import javax.persistence.*;
+import java.time.LocalDate;
+
+@Entity
+@Table(name = "chinoiserizs")
+@Getter
+public class ChinoiserizEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String title;
+    @Lob
+    private String description;
+    private LocalDate creationDate;
+    private int likeCount;
+    private int commentCount;
+    private String[] tags;
+    private Long userId;
+
+    public ChinoiserizEntity id(Long id) {
+        this.id = id;
+        return this;
+    }
+
+    public ChinoiserizEntity title(String title) {
+        this.title = title;
+        return this;
+    }
+
+    public ChinoiserizEntity description(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public ChinoiserizEntity creationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
+        return this;
+    }
+
+    public ChinoiserizEntity likeCount(int likeCount) {
+        this.likeCount = likeCount;
+        return this;
+    }
+
+    public ChinoiserizEntity commentCount(int commentCount) {
+        this.commentCount = commentCount;
+        return this;
+    }
+
+    public ChinoiserizEntity tags(String[] tags) {
+        this.tags = tags;
+        return this;
+    }
+
+    public ChinoiserizEntity userId(Long userId) {
+        this.userId = userId;
+        return this;
+    }
+}

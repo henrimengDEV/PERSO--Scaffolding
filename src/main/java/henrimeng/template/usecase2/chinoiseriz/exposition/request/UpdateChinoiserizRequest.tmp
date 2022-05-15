@@ -1,0 +1,7 @@
+import javax.validation.constraints.NotNull;
+
+public final class UpdateChinoiserizRequest {
+    @NotNull
+    public Long id;
+    public String title;
+}

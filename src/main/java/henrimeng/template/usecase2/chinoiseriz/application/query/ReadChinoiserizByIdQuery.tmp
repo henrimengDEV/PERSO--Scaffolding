@@ -1,0 +1,8 @@
+import lombok.Data;
+import lombok.NonNull;
+
+@Data
+public final class ReadChinoiserizByIdQuery implements Query {
+    @NonNull
+    private Long id;
+}

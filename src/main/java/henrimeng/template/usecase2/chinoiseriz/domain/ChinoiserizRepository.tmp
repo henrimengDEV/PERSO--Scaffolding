@@ -1,0 +1,9 @@
+import java.util.List;
+import java.util.Optional;
+
+public interface ChinoiserizRepository {
+    List<Chinoiseriz> findAll();
+    Optional<Chinoiseriz> findById(ChinoiserizId id);
+    ChinoiserizId save(Chinoiseriz Chinoiseriz);
+    ChinoiserizId delete(ChinoiserizId id);
+}

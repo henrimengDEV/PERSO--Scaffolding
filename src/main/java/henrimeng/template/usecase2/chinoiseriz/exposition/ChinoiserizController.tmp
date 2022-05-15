@@ -1,0 +1,60 @@
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@RestController
+@RequestMapping("/api/chinoiserizs")
+public class ChinoiserizController extends GlobalExceptionHandler {
+
+    private final CommandBus commandBus;
+    private final QueryBus queryBus;
+
+    public ChinoiserizController(CommandBus commandBus, QueryBus queryBus) {
+        this.commandBus = commandBus;
+        this.queryBus = queryBus;
+    }
+
+    @PostMapping
+    public ResponseEntity<?> create(@Valid @RequestBody CreateChinoiserizRequest request) {
+        Long id = commandBus.send(new CreateChinoiserizCmd(request.title));
+        return ResponseEntity.created(URI.create(id.toString())).build();
+    }
+
+    @GetMapping
+    public List<ChinoiserizResponse> readAll() {
+        List<Chinoiseriz> chinoiserizs = queryBus.send(new ReadChinoiserizQuery());
+        return chinoiserizs.stream().map(ChinoiserizResponse::fromChinoiseriz).collect(Collectors.toUnmodifiableList());
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<ChinoiserizResponse> readById(@PathVariable("id") Long id) {
+        Chinoiseriz chinoiseriz = queryBus.send(new ReadChinoiserizByIdQuery(id));
+        return ResponseEntity.ok(ChinoiserizResponse.fromChinoiseriz(chinoiseriz));
+    }
+
+    @PutMapping
+    public ResponseEntity<?> update(@Valid @RequestBody UpdateChinoiserizRequest request) {
+        commandBus.send(
+            UpdateChinoiserizCmd.builder()
+                .id(request.id)
+                .title(request.title)
+                .build()
+        );
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<?> delete(@Valid @PathVariable("id") Long id) {
+        commandBus.send(new DeleteChinoiserizByIdCmd(id));
+        return ResponseEntity.accepted().build();
+    }
+}
+
+
+
+
+

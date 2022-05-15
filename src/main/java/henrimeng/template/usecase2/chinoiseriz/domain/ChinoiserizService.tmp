@@ -1,0 +1,25 @@
+import java.util.List;
+
+public class ChinoiserizService {
+    private final ChinoiserizRepository chinoiserizRepository;
+
+    public ChinoiserizService(ChinoiserizRepository chinoiserizRepository) {
+        this.chinoiserizRepository = chinoiserizRepository;
+    }
+
+    public List<Chinoiseriz> getAll() {
+        return chinoiserizRepository.findAll();
+    }
+
+    public Chinoiseriz getById(ChinoiserizId id) {
+        return chinoiserizRepository.findById(id).orElseThrow(() -> new ChinoiserizNotFoundException(id));
+    }
+
+    public ChinoiserizId save(Chinoiseriz chinoiseriz) {
+        return chinoiserizRepository.save(chinoiseriz);
+    }
+
+    public ChinoiserizId remove(ChinoiserizId id) {
+        return chinoiserizRepository.delete(id);
+    }
+}

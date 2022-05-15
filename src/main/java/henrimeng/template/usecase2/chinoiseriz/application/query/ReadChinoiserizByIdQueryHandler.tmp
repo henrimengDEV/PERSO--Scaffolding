@@ -1,0 +1,13 @@
+public final class ReadChinoiserizByIdQueryHandler implements QueryHandler<ReadChinoiserizByIdQuery, Chinoiseriz> {
+
+    private final ChinoiserizService chinoiserizService;
+
+    public ReadChinoiserizByIdQueryHandler(ChinoiserizService chinoiserizService) {
+        this.chinoiserizService = chinoiserizService;
+    }
+
+    @Override
+    public Chinoiseriz handle(ReadChinoiserizByIdQuery query) {
+        return chinoiserizService.getById(new ChinoiserizId(query.getId()));
+    }
+}

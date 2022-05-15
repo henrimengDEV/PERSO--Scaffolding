@@ -1,0 +1,13 @@
+import org.springframework.stereotype.Component;
+
+@Component
+public final class ChinoiserizMapper {
+
+    public ChinoiserizEntity toEntity(Chinoiseriz chinoiseriz) {
+        return new ChinoiserizEntity().id(chinoiseriz.getId().getValue()).title(chinoiseriz.getTitle());
+    }
+
+    public Chinoiseriz toModel(ChinoiserizEntity chinoiserizEntity) {
+        return Chinoiseriz.of(new ChinoiserizId(chinoiserizEntity.getId()), chinoiserizEntity.getTitle());
+    }
+}

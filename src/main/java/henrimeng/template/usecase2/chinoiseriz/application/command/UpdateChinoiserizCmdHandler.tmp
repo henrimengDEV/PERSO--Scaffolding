@@ -1,0 +1,17 @@
+public final class UpdateChinoiserizCmdHandler implements CommandHandler<UpdateChinoiserizCmd, Void> {
+
+    private ChinoiserizService chinoiserizService;
+
+    public UpdateChinoiserizCmdHandler(ChinoiserizService chinoiserizService) {
+        this.chinoiserizService = chinoiserizService;
+    }
+
+    @Override
+    public Void handle(UpdateChinoiserizCmd command) {
+        chinoiserizService.save(Chinoiseriz.of(
+            new ChinoiserizId(command.id),
+            command.title
+        ));
+        return null;
+    }
+}

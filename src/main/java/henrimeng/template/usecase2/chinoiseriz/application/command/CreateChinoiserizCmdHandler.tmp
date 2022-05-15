@@ -1,0 +1,13 @@
+public final class CreateChinoiserizCmdHandler implements CommandHandler<CreateChinoiserizCmd, Long> {
+
+    private final ChinoiserizService chinoiserizService;
+
+    public CreateChinoiserizCmdHandler(ChinoiserizService chinoiserizService) {
+        this.chinoiserizService = chinoiserizService;
+    }
+
+    @Override
+    public Long handle(CreateChinoiserizCmd command) {
+        return chinoiserizService.save(Chinoiseriz.createChinoiseriz(command.title)).getValue();
+    }
+}

@@ -1,0 +1,8 @@
+import lombok.Data;
+import lombok.NonNull;
+
+@Data
+public final class CreateChinoiserizCmd implements Command {
+    @NonNull
+    public String title;
+}

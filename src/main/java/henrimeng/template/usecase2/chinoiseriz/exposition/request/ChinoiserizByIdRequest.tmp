@@ -1,0 +1,6 @@
+import javax.validation.constraints.NotNull;
+
+public final class ChinoiserizByIdRequest {
+    @NotNull
+    public Long id;
+}
